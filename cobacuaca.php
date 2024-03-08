@@ -2,12 +2,13 @@
 // Pengaturan untuk koneksi ke API OpenWeatherMap
 $apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
 $api_key = "93cddb2f189cf9e314ea67778cf1fe2b";
+$url = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=$api_key";
 
 // Kota yang ingin Anda dapatkan cuacanya
 $city = 'Jakarta';
 
 // URL lengkap untuk permintaan cuaca
-$url = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$api_key";
+// $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$api_key";
 
 // Melakukan permintaan ke API dan mendapatkan respons JSON
 $response = file_get_contents($url);

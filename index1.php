@@ -120,6 +120,7 @@
     .jam .jam-bg {
         background-color: white;
 
+
     }
 
     .jam-bg h2 {
@@ -149,10 +150,10 @@
     function getCurrentTime()
     {
         // Set zona waktu sesuai kebutuhan
-        date_default_timezone_set('Asia/Jakarta'); // Contoh: Asia/Jakarta
+        date_default_timezone_set('asia/jakarta'); // Contoh: Asia/Jakarta
 
         // Mendapatkan waktu saat ini dalam format jam dan menit
-        $currentTime = date('H:i A');
+        $currentTime = date('h:i A');
 
         return $currentTime;
     }
@@ -175,13 +176,15 @@
 
             <div class="right d-flex   ">
 
-                <div class="jam  me-5 m-auto ">
-                    <div class=" jam-bg rounded p-0 text-wrap d-flex" style="width: 10rem;">
-                        <div class=" tgl-bg   rounded-start me-2  text-wrap" style="width: 6rem;">
-                            <p class="fs-5   pt-1 text-center"><?= $tanggal  ?></p>
-                            <p class="fs-6  text-center"><?= $bulan ?></p>
+                <div class="jam  me-5  ">
+                    <div class=" jam-bg rounded p-0 text-wrap d-flex">
+                        <div class=" tgl-bg  p-1  rounded-start me-2  ">
+                            <div class="text-center"><?= $tanggal ?></div>
+                            <div class=""><?= $bulan ?></div>
+
                         </div>
-                        <h2 class="title-jam fs-3  text-center  pe-2 pt-1"><?= $currentTime ?></h2>
+
+                        <h2 class="title-jam fs-4  text-center m-auto pe-2 pt-1"><?= $currentTime ?></h2>
                         <!-- <p class="fs-6 text-center">March</p> -->
                     </div>
 
