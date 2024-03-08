@@ -143,24 +143,94 @@
     $koneksi = mysqli_connect("localhost", "root", "", "db_informasi");
     $rows = mysqli_query($koneksi, "SELECT * FROM tb_data");
 
-    $tanggal = Date('d');
-    $bulan = Date('F');
 
 
     function getCurrentTime()
     {
         // Set zona waktu sesuai kebutuhan
-        date_default_timezone_set('asia/jakarta'); // Contoh: Asia/Jakarta
+        date_default_timezone_set('Asia/Jakarta'); // Format huruf besar untuk zona waktu
 
-        // Mendapatkan waktu saat ini dalam format jam dan menit
+        // Mendapatkan waktu saat ini dalam format jam, menit, tanggal, dan bulan
         $currentTime = date('h:i A');
+        $tanggal = date('d');
+        $bulan = date('F');
 
-        return $currentTime;
+        // Mengembalikan nilai tanggal dan bulan dalam bentuk array
+        return array(
+            'time' => $currentTime,
+            'date' => $tanggal,
+            'month' => $bulan
+        );
     }
-    $currentTime = getCurrentTime();
 
-    //API Cuaca
+    // Memanggil fungsi getCurrentTime() dan menyimpan hasilnya dalam variabel
+    $currentData = getCurrentTime();
 
+    // Mengakses nilai waktu, tanggal, dan bulan dari array yang dikembalikan oleh fungsi
+    $currentTime = $currentData['time'];
+    $tanggal = $currentData['date'];
+    $bulan = $currentData['month'];
+
+    // Pengaturan untuk koneksi ke API OpenWeatherMap
+    $apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
+    $api_key = "93cddb2f189cf9e314ea67778cf1fe2b";
+
+    // Kota yang ingin Anda dapatkan cuacanya
+    $city = 'Padang';
+
+    // URL lengkap untuk permintaan cuaca
+    $urlsekarang = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$api_key";
+    $urlprediksi = "http://api.openweathermap.org/data/2.5/forecast?q=$city&appid=$api_key";
+
+    // Melakukan permintaan ke API dan mendapatkan respons JSON
+    $response = file_get_contents($urlsekarang);
+    $hasil = file_get_contents($urlprediksi);
+
+    // Mengonversi respons JSON menjadi array asosiatif
+    $weatherData = json_decode($response, true);
+    $prediksiData = json_decode($hasil, true);
+
+    // Menampilkan data cuaca
+    if ($weatherData && isset($weatherData['main'], $weatherData['weather'])) {
+        $temperature = $weatherData['main']['temp'];
+        $weatherDescription = $weatherData['weather'][0]['description'];
+        $cuacasekarang = $weatherData['weather'][0]['main'];
+
+        // echo "Cuaca di {$city}:<br>";
+        $suhu = round($temperature - 273.15, 1) . " °C" . "<br>"; // Konversi ke Celcius
+
+    } else {
+    }
+    if ($prediksiData && isset($prediksiData['list'][0]['main'], $prediksiData['list'][0]['weather'])) {
+        $temperaturepre = $prediksiData['list'][0]['main']['temp'];
+        $weatherDescriptionf = $prediksiData['list'][0]['weather'][0]['description'];
+
+
+        $suhupredik = round($temperaturepre - 273.15, 1) . " °C<br>"; // Konversi ke Celcius
+
+    } else {
+        // echo "Tidak dapat mengambil data prediksi cuaca.";
+    }
+    if ($weatherDescription === "light rain") {
+        $gambarcuaca = "img/light-rain.png";
+    } elseif ($weatherDescription === "Clear sky") {
+        $gambarcuaca = "img/sunny.png";
+    } elseif ($weatherDescription === "Heavy rain") {
+        $gambarcuaca = "img/heavy-rain.png";
+    } else {
+        $gambarcuaca = "img/cloudy.png";
+    }
+
+
+    if ($weatherDescriptionf === "light rain") {
+        $gambarcuacap = "img/light-rain.png";
+    } elseif ($weatherDescriptionf === "Clear sky") {
+        $gambarcuacap = "img/sunny.png";
+    } elseif ($weatherDescriptionf === "Heavy rain") {
+        $gambarcuacap = "img/heavy-rain.png";
+    } else {
+        $gambarcuacap = "img/cloudy.png";
+    }
 
 
 
@@ -202,7 +272,6 @@
             </div>
 
 
-
         </div>
         <!-- header -->
         <!--  content-->
@@ -231,21 +300,15 @@
                 <div class="cuaca d-flex mb-4 pb-2 pe-2 ps-2">
                     <div class="sekarang  m-auto ">
                         <div class="fs-3 mb-3 fw-bold ">Sekarang</div>
-                        <div class="text-center  mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-0-circle-fill" viewBox="0 0 16 16">
-                                <path d="M8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895" />
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-8.012 4.158c1.858 0 2.96-1.582 2.96-3.99V7.84c0-2.426-1.079-3.996-2.936-3.996-1.864 0-2.965 1.588-2.965 3.996v.328c0 2.42 1.09 3.99 2.941 3.99" />
-                            </svg></div>
-                        <div class="text-center">28 C</div>
+                        <div class="text-center  mb-4"><img src="<?= $gambarcuaca ?>" alt="" srcset=""></div>
+                        <div class="text-center"><?= $suhu ?></div>
 
                     </div>
 
                     <div class="besok m-auto ">
                         <div class="fs-3 mb-3 fw-bold ">Besok</div>
-                        <div class="text-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-0-circle-fill" viewBox="0 0 16 16">
-                                <path d="M8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895" />
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-8.012 4.158c1.858 0 2.96-1.582 2.96-3.99V7.84c0-2.426-1.079-3.996-2.936-3.996-1.864 0-2.965 1.588-2.965 3.996v.328c0 2.42 1.09 3.99 2.941 3.99" />
-                            </svg></div>
-                        <div class="text-center">28 C</div>
+                        <div class="text-center mb-4"><img src="<?= $gambarcuacap ?>" alt="" srcset=""></div>
+                        <div class="text-center"><?= $suhupredik ?></div>
                     </div>
                 </div>
 
