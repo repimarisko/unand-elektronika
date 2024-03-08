@@ -158,6 +158,9 @@
     }
     $currentTime = getCurrentTime();
 
+    //API Cuaca
+
+
 
 
     ?>
@@ -194,6 +197,7 @@
                     </div>
                 </div>
             </div>
+
 
 
         </div>

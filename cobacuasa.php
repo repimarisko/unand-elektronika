@@ -4,7 +4,7 @@ $apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
 $api_key = "93cddb2f189cf9e314ea67778cf1fe2b";
 
 // Kota yang ingin Anda dapatkan cuacanya
-$city = 'Jakarta';
+$city = 'Padang';
 
 // URL lengkap untuk permintaan cuaca
 $url = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$api_key";
