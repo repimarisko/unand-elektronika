@@ -15,6 +15,8 @@
         --green-color: #008B4A;
         --yellow-color: #F4F27E;
         --yellow-alt: #FFF5C2;
+        --gold--: gold;
+        --lime--: limegreend;
 
 
     }
@@ -26,33 +28,35 @@
         box-sizing: border-box;
     }
 
-    .container-fluid .header {
-
-        background-color: grey;
-
-
-    }
+    .container-fluid .header {}
 
     .header .title {}
 
     .header .title h1 {
-        color: gold;
+        color: var(--gold--);
     }
 
     .header .title h2 {
-        border-top: 1px solid gold;
+        border-top: 1px solid var(--gold--);
         display: inline-block;
-        color: blue;
+        color: white;
     }
 
     .header .right {
         display: inline-block;
-        gap: 0;
+
+    }
+
+    .header .right .logo {}
+
+    .header {
+        background-color: var(--primary-color);
     }
 
     .header .jam-kotak {
         line-height: .1;
         width: 70px;
+
 
 
     }
@@ -69,29 +73,37 @@
     }
 
 
+
     .conten {
         width: 100%;
-        height: 100px;
+
+        height: 100%;
 
     }
 
     .conten .conten-satu {
         width: 70%;
-        background-color: var(--primary-color);
 
+        height: 550px;
+        /* background-color: #e3e3e3; */
+        margin: 5px;
     }
 
     .conten .conten-dua {
         width: 30%;
+        padding: 10px;
+        /* background-color: #e3e3e3; */
+        height: 550px;
+        margin: 5px;
 
 
     }
 
-    .kotak-conten-satu svg {
-        position: absolute;
-        z-index: -99;
-        width: 65%;
+    .kotak-conten-satu {
+        height: inherit;
     }
+
+
 
     .kotak-conten-dua {}
 
@@ -99,17 +111,38 @@
 
     .footer {
         height: 40px;
+        background-color: var(--primary-color);
+        color: white;
+        line-height: 40px;
 
     }
+
+    .jam .jam-bg {
+        background-color: white;
+
+    }
+
+    .jam-bg h2 {
+
+        color: var(--primary-color);
+    }
+
+    .jam .tgl-bg {
+        background: var(--green-color);
+        color: white;
+
+    }
+
+    .conten-dua .status {}
 </style>
 
 <body>
 
 
 
-    <div class="container-fluid">
+    <div class="">
         <!-- header -->
-        <div class="header d-flex justify-content-between ">
+        <div class="header ps-2 pe-2 d-flex justify-content-between ">
 
             <div class=" title ">
                 <h1 class="fs-3 lh-1">Jurusan Elektronika</h1>
@@ -117,25 +150,22 @@
                 <h2 class="fs-4">Fakultas Teknik</h2>
             </div>
 
-            <div class="right d-flex  ">
+            <div class="right d-flex   ">
 
-                <div class="jam  ">
-
-
-
-                    <div class=" bg-danger rounded p-0 text-wrap d-flex" style="width: 10rem;">
-                        <div class=" bg-primary  rounded-start me-2  text-wrap" style="width: 6rem;">
+                <div class="jam  me-5 m-auto ">
+                    <div class=" jam-bg rounded p-0 text-wrap d-flex" style="width: 10rem;">
+                        <div class=" tgl-bg   rounded-start me-2  text-wrap" style="width: 6rem;">
                             <h1 class="fs-3   pt-1 text-center">00</h1>
                             <!-- <p class="fs-6 text-center">March</p> -->
                         </div>
-                        <h1 class="fs-3 text-white text-center  pe-2 pt-1">00:00</h1>
+                        <h2 class="title-jam fs-3  text-center  pe-2 pt-1">00:00</h2>
                         <!-- <p class="fs-6 text-center">March</p> -->
                     </div>
 
 
                 </div>
-                <div class="logo">
-                    <div class="badge badge-primary text-wrap" style="width: 10rem;">
+                <div class="logo m-auto ">
+                    <div class="badge badge-primary text-wrap">
                         <img src="img/logo-unand.png" alt="" width="45">
                         <!-- <p class="fs-6 text-center">March</p> -->
                     </div>
@@ -146,36 +176,30 @@
         </div>
         <!-- header -->
         <!--  content-->
-        <div class="conten mt-2 d-flex ">
-            <div class="conten-satu">
-                <div class="kotak-conten-satu">
+        <div class="conten  mt-2  d-flex p-2 ">
+            <div class="conten-satu rounded">
+                <div class="kotak-conten-satu   ">
 
                     <div class="conten-satu-title">
-                        <div class=" fs-3 ms-4 text-white">Fakultas Teknik</div>
-                        <div class=" fs-6 ms-4 text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                        <div class=" fs-3 ms-4 text-black">Fakultas Teknik</div>
+                        <div class=" fs-6 ms-4 text-black">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</div>
+                    </div>
+                    <div class="embed text-center  mt-2 ms-4">
+                        <video width="100%" controls>
+                            <source src="video/mov_bbb.mp4" type="video/mp4">
+
+                        </video>
                     </div>
 
                 </div>
                 <div class="kotak-conten-dua">
 
-                    <div class="row justify-content-start mt-4">
-                        <div class="col-md-8 ">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <video id="video" width="152%" src="video/mov_bbb.mp4" class="embed-responsive-item" playsinline controls autoplay loop>
-
-                                </video>
-                            </div>
-
-
-                        </div>
-                    </div>
                 </div>
-
             </div>
-            <div class="conten-dua ">
+            <div class="conten-dua rounded ">
 
                 <div class="cuaca d-flex mb-4 pb-2 pe-2 ps-2">
-                    <div class="sekarang me-5 ">
+                    <div class="sekarang  m-auto ">
                         <div class="fs-3 mb-3 fw-bold ">Sekarang</div>
                         <div class="text-center  mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-0-circle-fill" viewBox="0 0 16 16">
                                 <path d="M8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895" />
@@ -185,7 +209,7 @@
 
                     </div>
 
-                    <div class="besok ms-5 ">
+                    <div class="besok m-auto ">
                         <div class="fs-3 mb-3 fw-bold ">Besok</div>
                         <div class="text-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-0-circle-fill" viewBox="0 0 16 16">
                                 <path d="M8 4.951c-1.008 0-1.629 1.09-1.629 2.895v.31c0 1.81.627 2.895 1.629 2.895s1.623-1.09 1.623-2.895v-.31c0-1.8-.621-2.895-1.623-2.895" />
@@ -195,11 +219,11 @@
                     </div>
                 </div>
 
-                <div class="status">
+                <div class="status  ">
                     <div class="fs-3 text-center fw-bold">Status Pimpinan</div>
                     <div class="table-responsive table-bordered ">
-                        <table class="table table-striped table-hover table-borderless table-primary align-middle">
-                            <thead class="table-light text-center">
+                        <table class="table table-striped table-hover table-borderless table-default align-middle">
+                            <thead class=" text-center">
 
                                 <tr>
                                     <th>Jabatan</th>
@@ -208,12 +232,12 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider text-center">
-                                <tr class="table-primary">
+                                <tr class="">
                                     <td scope="row">Item</td>
                                     <td>Item</td>
                                     <td>Item</td>
                                 </tr>
-                                <tr class="table-primary">
+                                <tr class="">
                                     <td scope="row">Item</td>
                                     <td>Item</td>
                                     <td>Item</td>
@@ -233,7 +257,7 @@
 
         <!--  content-->
         <!-- footer -->
-        <div class="footer fixed-bottom bg-black">
+        <div class="footer fixed-bottom ">
             <marquee behavior="" direction="">SELAMAT DATANG DI FMIPA UNAND!!!SELAMAT DATANG DI FMIPA UNAND!!!SELAMAT DATANG DI FMIPA UNAND!!!</marquee>
         </div>
         <!-- footer -->
